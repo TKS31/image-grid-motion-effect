@@ -27,7 +27,6 @@ body {
 }
 
 .grid {
-  pointer-events: none;
   position: absolute;
   width: 110%;
   height: 110%;

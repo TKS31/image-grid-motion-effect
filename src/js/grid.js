@@ -1,5 +1,5 @@
 import { gsap } from "gsap";
-import { map, lerp, getMousePos, calcWinsize, getRandomNumber } from "./utils";
+import { map, lerp, getMousePos, calcWinsize } from "./utils";
 
 // Calculate the viewport size
 let winsize = calcWinsize();
@@ -19,8 +19,8 @@ class GridItem {
     // amounts to move in each axis
     let translationVals = { tx: 0, ty: 0 };
     // get random start and end movement boundaries
-    const xstart = getRandomNumber(15, 60);
-    const ystart = getRandomNumber(15, 60);
+    const xstart = 80;
+    const ystart = 80;
 
     // infinite loop
     const render = () => {
@@ -29,12 +29,12 @@ class GridItem {
       // Translation values will be in the range of [-start, start] for a cursor movement from 0 to the window's width/height
       translationVals.tx = lerp(
         translationVals.tx,
-        map(mousepos.x, 0, winsize.width, -xstart, xstart),
+        map(mousepos.x, 0, winsize.width, xstart, -xstart),
         0.07
       );
       translationVals.ty = lerp(
         translationVals.ty,
-        map(mousepos.y, 0, winsize.height, -ystart, ystart),
+        map(mousepos.y, 0, winsize.height, ystart, -ystart),
         0.07
       );
 
@@ -74,7 +74,7 @@ export default class Grid {
         {
           duration: 3,
           ease: "Power1.easeOut",
-          opacity: 0.4,
+          opacity: 1,
           stagger: { amount: 0.6, grid: "auto", from: "center" }
         },
         0
