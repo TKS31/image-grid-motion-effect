@@ -9,11 +9,40 @@ window.addEventListener("resize", () => (winsize = calcWinsize()));
 let mousepos = { x: winsize.width / 2, y: winsize.height / 2 };
 window.addEventListener("mousemove", (ev) => (mousepos = getMousePos(ev)));
 
-class GridMover {
+export default class Grid {
   constructor(el) {
     this.DOM = { el: el };
+    this.items = [...this.DOM.el.querySelectorAll(".grid__item")];
+    this.showItems();
     this.move();
   }
+  // Initial animation to scale up and fade in the items
+  showItems() {
+    gsap
+      .timeline()
+      .set(this.items, { scale: 0.7, opacity: 0 }, 0)
+      .to(
+        this.items,
+        {
+          duration: 2,
+          ease: "Expo.easeOut",
+          scale: 1,
+          stagger: { amount: 0.6, grid: "auto", from: "center" }
+        },
+        0
+      )
+      .to(
+        this.items,
+        {
+          duration: 3,
+          ease: "Power1.easeOut",
+          opacity: 1,
+          stagger: { amount: 0.6, grid: "auto", from: "center" }
+        },
+        0
+      );
+  }
+
   // Move the items when moving the cursor
   move() {
     // amounts to move in each axis
@@ -42,40 +71,5 @@ class GridMover {
       requestAnimationFrame(render);
     };
     requestAnimationFrame(render);
-  }
-}
-
-export default class Grid {
-  constructor(el) {
-    this.DOM = { el: el };
-    this.items = [...this.DOM.el.querySelectorAll(".grid__item")];
-    new GridMover(this.DOM.el);
-    this.showItems();
-  }
-  // Initial animation to scale up and fade in the items
-  showItems() {
-    gsap
-      .timeline()
-      .set(this.items, { scale: 0.7, opacity: 0 }, 0)
-      .to(
-        this.items,
-        {
-          duration: 2,
-          ease: "Expo.easeOut",
-          scale: 1,
-          stagger: { amount: 0.6, grid: "auto", from: "center" }
-        },
-        0
-      )
-      .to(
-        this.items,
-        {
-          duration: 3,
-          ease: "Power1.easeOut",
-          opacity: 1,
-          stagger: { amount: 0.6, grid: "auto", from: "center" }
-        },
-        0
-      );
   }
 }
