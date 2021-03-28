@@ -28,10 +28,10 @@ body {
 
 .grid {
   position: absolute;
-  width: 110%;
-  height: 110%;
-  top: -5%;
-  left: -5%;
+  width: 120%;
+  height: 120%;
+  top: -10%;
+  left: -10%;
   display: grid;
   grid-template-columns: repeat(50, 2%);
   grid-template-rows: repeat(50, 2%);

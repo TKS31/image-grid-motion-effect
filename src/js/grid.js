@@ -9,7 +9,7 @@ window.addEventListener("resize", () => (winsize = calcWinsize()));
 let mousepos = { x: winsize.width / 2, y: winsize.height / 2 };
 window.addEventListener("mousemove", (ev) => (mousepos = getMousePos(ev)));
 
-class GridItem {
+class GridMover {
   constructor(el) {
     this.DOM = { el: el };
     this.move();
@@ -19,8 +19,8 @@ class GridItem {
     // amounts to move in each axis
     let translationVals = { tx: 0, ty: 0 };
     // get random start and end movement boundaries
-    const xstart = 80;
-    const ystart = 80;
+    const xstart = 100;
+    const ystart = 100;
 
     // infinite loop
     const render = () => {
@@ -48,10 +48,8 @@ class GridItem {
 export default class Grid {
   constructor(el) {
     this.DOM = { el: el };
-    this.gridItems = [];
     this.items = [...this.DOM.el.querySelectorAll(".grid__item")];
-    this.items.forEach((item) => this.gridItems.push(new GridItem(item)));
-
+    new GridMover(this.DOM.el);
     this.showItems();
   }
   // Initial animation to scale up and fade in the items
